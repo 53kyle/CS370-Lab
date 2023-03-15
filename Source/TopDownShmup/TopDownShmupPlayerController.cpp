@@ -21,8 +21,10 @@ void ATopDownShmupPlayerController::PlayerTick(float DeltaTime)
 //	}
 }
 
-void smth() {
-    return smth;
+
+void somefunc() {
+    
+    return;
 }
 
 void ATopDownShmupPlayerController::SetupInputComponent()
