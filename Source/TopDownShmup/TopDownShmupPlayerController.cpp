@@ -14,11 +14,11 @@ void ATopDownShmupPlayerController::PlayerTick(float DeltaTime)
 {
 	Super::PlayerTick(DeltaTime);
 
-	// keep updating the destination every tick while desired
-	if (bMoveToMouseCursor)
-	{
-		MoveToMouseCursor();
-	}
+//	// keep updating the destination every tick while desired
+//	if (bMoveToMouseCursor)
+//	{
+//		MoveToMouseCursor();
+//	}
 }
 
 void ATopDownShmupPlayerController::SetupInputComponent()
