@@ -21,6 +21,10 @@ void ATopDownShmupPlayerController::PlayerTick(float DeltaTime)
 //	}
 }
 
+void smth() {
+    return smth;
+}
+
 void ATopDownShmupPlayerController::SetupInputComponent()
 {
 	// set up gameplay key bindings
