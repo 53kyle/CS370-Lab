@@ -37,7 +37,7 @@ void ATopDownShmupPlayerController::SetupInputComponent()
     
     InputComponent->BindAxis("MoveForward", this, &ATopDownShmupPlayerController::MoveForward);
     
-    InputComponent->BindAxis("MoveRight", this, &ATopDownShmupPlayerController::MoveForward);
+    InputComponent->BindAxis("MoveRight", this, &ATopDownShmupPlayerController::MoveRight);
 }
 
 void ATopDownShmupPlayerController::MoveToMouseCursor()
