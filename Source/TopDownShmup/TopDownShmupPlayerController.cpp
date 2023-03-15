@@ -14,6 +14,7 @@ void ATopDownShmupPlayerController::PlayerTick(float DeltaTime)
 {
 	Super::PlayerTick(DeltaTime);
 
+    //on click stuff
 //	// keep updating the destination every tick while desired
 //	if (bMoveToMouseCursor)
 //	{
@@ -21,23 +22,22 @@ void ATopDownShmupPlayerController::PlayerTick(float DeltaTime)
 //	}
 }
 
-
-void somefunc() {
-    
-    return;
-}
-
 void ATopDownShmupPlayerController::SetupInputComponent()
 {
 	// set up gameplay key bindings
 	Super::SetupInputComponent();
 
-	InputComponent->BindAction("SetDestination", IE_Pressed, this, &ATopDownShmupPlayerController::OnSetDestinationPressed);
-	InputComponent->BindAction("SetDestination", IE_Released, this, &ATopDownShmupPlayerController::OnSetDestinationReleased);
-
-	// support touch devices 
-	InputComponent->BindTouch(EInputEvent::IE_Pressed, this, &ATopDownShmupPlayerController::MoveToTouchLocation);
-	InputComponent->BindTouch(EInputEvent::IE_Repeat, this, &ATopDownShmupPlayerController::MoveToTouchLocation);
+    //on click stuff
+//	InputComponent->BindAction("SetDestination", IE_Pressed, this, &ATopDownShmupPlayerController::OnSetDestinationPressed);
+//	InputComponent->BindAction("SetDestination", IE_Released, this, &ATopDownShmupPlayerController::OnSetDestinationReleased);
+//
+//	// support touch devices
+//	InputComponent->BindTouch(EInputEvent::IE_Pressed, this, &ATopDownShmupPlayerController::MoveToTouchLocation);
+//	InputComponent->BindTouch(EInputEvent::IE_Repeat, this, &ATopDownShmupPlayerController::MoveToTouchLocation);
+    
+    InputComponent->BindAxis("MoveForward", this, &ATopDownShmupPlayerController::MoveForward);
+    
+    InputComponent->BindAxis("MoveRight", this, &ATopDownShmupPlayerController::MoveForward);
 }
 
 void ATopDownShmupPlayerController::MoveToMouseCursor()
@@ -92,4 +92,26 @@ void ATopDownShmupPlayerController::OnSetDestinationReleased()
 {
 	// clear flag to indicate we should stop updating the destination
 	bMoveToMouseCursor = false;
+}
+
+//move forward
+void ATopDownShmupPlayerController::MoveForward(float Value) {
+    if (Value != 0.0f) {
+        APawn* const Pawn = GetPawn();
+        if (Pawn)
+        {
+            Pawn->AddMovementInput(FVector(1.0f,0.0f,0.0f), Value);
+        }
+    }
+}
+
+//move right
+void ATopDownShmupPlayerController::MoveRight(float Value) {
+    if (Value != 0.0f) {
+        APawn* const Pawn = GetPawn();
+        if (Pawn)
+        {
+            Pawn->AddMovementInput(FVector(0.0f,1.0f,0.0f), Value);
+        }
+    }
 }
