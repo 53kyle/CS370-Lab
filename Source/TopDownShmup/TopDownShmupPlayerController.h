@@ -1,6 +1,8 @@
 // Copyright 1998-2015 Epic Games, Inc. All Rights Reserved.
 #pragma once
 #include "GameFramework/PlayerController.h"
+#include "Math/Vector.h"
+#include "Math/Rotator.h"
 #include "TopDownShmupPlayerController.generated.h"
 
 UCLASS()
@@ -22,6 +24,7 @@ protected:
 
 	/** Navigate player to the current mouse cursor location. */
 	void MoveToMouseCursor();
+    void UpdateMouseLook();
 
 	/** Navigate player to the current touch location. */
 	void MoveToTouchLocation(const ETouchIndex::Type FingerIndex, const FVector Location);

@@ -1,5 +1,10 @@
 // Copyright 1998-2015 Epic Games, Inc. All Rights Reserved.
 
+//PART1 TODO: UpdateMouseLook function
+//FINISHED:
+//-BASIC WASD MOVEMENT
+
+
 #include "TopDownShmupPlayerController.h"
 #include "TopDownShmup.h"
 #include "Blueprint/AIBlueprintHelperLibrary.h"
@@ -20,6 +25,9 @@ void ATopDownShmupPlayerController::PlayerTick(float DeltaTime)
 //	{
 //		MoveToMouseCursor();
 //	}
+    
+    //new mouse camera function
+    UpdateMouseLook();
 }
 
 void ATopDownShmupPlayerController::SetupInputComponent()
@@ -38,6 +46,8 @@ void ATopDownShmupPlayerController::SetupInputComponent()
     InputComponent->BindAxis("MoveForward", this, &ATopDownShmupPlayerController::MoveForward);
     
     InputComponent->BindAxis("MoveRight", this, &ATopDownShmupPlayerController::MoveRight);
+    
+    
 }
 
 void ATopDownShmupPlayerController::MoveToMouseCursor()
@@ -112,6 +122,28 @@ void ATopDownShmupPlayerController::MoveRight(float Value) {
         if (Pawn)
         {
             Pawn->AddMovementInput(FVector(0.0f,1.0f,0.0f), Value);
+        }
+    }
+}
+
+//mouse look
+void ATopDownShmupPlayerController::UpdateMouseLook() {
+    APawn* const Pawn = GetPawn();
+    
+    if (Pawn) {
+        FHitResult Hit;
+        GetHitResultUnderCursor(ECC_Visibility, false, Hit);
+        
+        if (Hit.bBlockingHit)
+        {
+            FVector forMouseLook =  Hit.ImpactPoint - Pawn->GetActorLocation();
+            
+            //normalizing for the rotation
+            forMouseLook.Normalize(0.0f);
+            
+            //set rotation
+            Pawn->SetActorRotation(FRotator(forMouseLook.Rotation()));
+            
         }
     }
 }
