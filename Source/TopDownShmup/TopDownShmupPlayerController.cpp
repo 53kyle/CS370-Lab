@@ -18,13 +18,10 @@ ATopDownShmupPlayerController::ATopDownShmupPlayerController()
 void ATopDownShmupPlayerController::PlayerTick(float DeltaTime)
 {
 	Super::PlayerTick(DeltaTime);
-
+    
     //on click stuff
-//	// keep updating the destination every tick while desired
-//	if (bMoveToMouseCursor)
-//	{
-//		MoveToMouseCursor();
-//	}
+    InputComponent->BindAction("Fire", IE_Pressed, this, &ATopDownShmupPlayerController::OnStartFire);
+    InputComponent->BindAction("Fire", IE_Released, this, &ATopDownShmupPlayerController::OnStopFire);
     
     //new mouse camera function
     UpdateMouseLook();
@@ -34,14 +31,6 @@ void ATopDownShmupPlayerController::SetupInputComponent()
 {
 	// set up gameplay key bindings
 	Super::SetupInputComponent();
-
-    //on click stuff
-//	InputComponent->BindAction("SetDestination", IE_Pressed, this, &ATopDownShmupPlayerController::OnSetDestinationPressed);
-//	InputComponent->BindAction("SetDestination", IE_Released, this, &ATopDownShmupPlayerController::OnSetDestinationReleased);
-//
-//	// support touch devices
-//	InputComponent->BindTouch(EInputEvent::IE_Pressed, this, &ATopDownShmupPlayerController::MoveToTouchLocation);
-//	InputComponent->BindTouch(EInputEvent::IE_Repeat, this, &ATopDownShmupPlayerController::MoveToTouchLocation);
     
     InputComponent->BindAxis("MoveForward", this, &ATopDownShmupPlayerController::MoveForward);
     
@@ -50,7 +39,7 @@ void ATopDownShmupPlayerController::SetupInputComponent()
     
 }
 
-void ATopDownShmupPlayerController::MoveToMouseCursor()
+/*void ATopDownShmupPlayerController::MoveToMouseCursor()
 {
 	// Trace to see what is under the mouse cursor
 	FHitResult Hit;
@@ -75,7 +64,7 @@ void ATopDownShmupPlayerController::MoveToTouchLocation(const ETouchIndex::Type 
 		// We hit something, move there
 		SetNewMoveDestination(HitResult.ImpactPoint);
 	}
-}
+}*/
 
 void ATopDownShmupPlayerController::SetNewMoveDestination(const FVector DestLocation)
 {
@@ -92,16 +81,20 @@ void ATopDownShmupPlayerController::SetNewMoveDestination(const FVector DestLoca
 	}
 }
 
-void ATopDownShmupPlayerController::OnSetDestinationPressed()
-{
-	// set flag to keep updating destination until released
-	bMoveToMouseCursor = true;
+void ATopDownShmupPlayerController::OnStartFire() {
+    APawn* const Pawn = GetPawn();
+    
+    ATopDownShmupCharacter *MyCharacter = Cast<ATopDownShmupCharacter>(Pawn);
+    
+    MyCharacter->OnStartFire();
 }
 
-void ATopDownShmupPlayerController::OnSetDestinationReleased()
-{
-	// clear flag to indicate we should stop updating the destination
-	bMoveToMouseCursor = false;
+void ATopDownShmupPlayerController::OnStopFire() {
+    APawn* const Pawn = GetPawn();
+    
+    ATopDownShmupCharacter *MyCharacter = Cast<ATopDownShmupCharacter>(Pawn);
+    
+    MyCharacter->OnStopFire();
 }
 
 //move forward

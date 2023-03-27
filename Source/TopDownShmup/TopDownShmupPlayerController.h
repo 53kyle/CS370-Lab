@@ -3,6 +3,7 @@
 #include "GameFramework/PlayerController.h"
 #include "Math/Vector.h"
 #include "Math/Rotator.h"
+#include "TopDownShmupCharacter.h"
 #include "TopDownShmupPlayerController.generated.h"
 
 UCLASS()
@@ -23,18 +24,18 @@ protected:
 	// End PlayerController interface
 
 	/** Navigate player to the current mouse cursor location. */
-	void MoveToMouseCursor();
+	//void MoveToMouseCursor();
     void UpdateMouseLook();
 
 	/** Navigate player to the current touch location. */
-	void MoveToTouchLocation(const ETouchIndex::Type FingerIndex, const FVector Location);
+	//void MoveToTouchLocation(const ETouchIndex::Type FingerIndex, const FVector Location);
 	
 	/** Navigate player to the given world location. */
 	void SetNewMoveDestination(const FVector DestLocation);
 
-	/** Input handlers for SetDestination action. */
-	void OnSetDestinationPressed();
-	void OnSetDestinationReleased();
+	/** Input handlers for Fire action. */
+    void OnStartFire();
+    void OnStopFire();
     
     void MoveForward(float value);
     void MoveRight(float value);

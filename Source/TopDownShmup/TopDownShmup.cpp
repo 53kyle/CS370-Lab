@@ -7,3 +7,4 @@ IMPLEMENT_PRIMARY_GAME_MODULE( FDefaultGameModuleImpl, TopDownShmup, "TopDownShm
 
 DEFINE_LOG_CATEGORY(LogTopDownShmup)
  
+
