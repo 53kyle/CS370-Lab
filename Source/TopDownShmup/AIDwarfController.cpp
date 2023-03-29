@@ -16,8 +16,6 @@ void AAIDwarfController::BeginPlay() {
     Super::BeginPlay();
     SetState(EDwarfState::EStart);
     
-    MoveToActor(UGameplayStatics::GetPlayerPawn(GetWorld(), 0));
-    
     Range = 150.0f;
 }
 
@@ -32,7 +30,7 @@ void AAIDwarfController::OnMoveCompleted(FAIRequestID RequestID, EPathFollowingR
     
     if (GEngine)
         {
-            GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Dwarf Movee4 Completed")));
+            GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Dwarf Move Completed")));
         }
 }
 
@@ -41,6 +39,7 @@ void AAIDwarfController::Tick(float DeltaTime)
     Super::Tick(DeltaTime);
     
     if (GetState() == EDwarfState::EStart) {
+        MoveToActor(UGameplayStatics::GetPlayerPawn(GetWorld(), 0));
         SetState(EDwarfState::EChasing);
     }
     

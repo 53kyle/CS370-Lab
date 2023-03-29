@@ -8,7 +8,7 @@
 void ASpawnManager::BeginPlay() {
     Super::BeginPlay();
     
-    
+    SpawnCharacter();
 }
 void ASpawnManager::SpawnCharacter() {
     //ask about this later, need to know how weapon spawns were handled.
@@ -24,11 +24,12 @@ void ASpawnManager::SpawnCharacter() {
             
             int32 TArraySize = targetPoints.Num();
             
-            MyCharacter = World->SpawnActor<ACharacter>(DwarfCharacter, targetPoints[FMath::RandRange(0,TArraySize-1)]->GetTargetLocation(), Rotation, SpawnParams);
+            MyCharacter = World->SpawnActor<ADwarfCharacter>(DwarfCharacter, targetPoints[FMath::RandRange(0,TArraySize-1)]->GetTargetLocation(), Rotation, SpawnParams);
             
             
             
             if (MyCharacter) {
+                
                 MyCharacter->AttachToComponent(MyCharacter->GetMesh(), FAttachmentTransformRules(EAttachmentRule::KeepRelative, true), TEXT("RootComponent"));
                 MyCharacter->SpawnDefaultController();
             }
