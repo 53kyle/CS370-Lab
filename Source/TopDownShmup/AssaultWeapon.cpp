@@ -45,22 +45,10 @@ void AAssaultWeapon::OnStartFire() {
     if (!GetWorldTimerManager().IsTimerActive(FireTimer)) {
         GetWorldTimerManager().SetTimer(FireTimer, this, &AAssaultWeapon::WeaponTrace, 1/FireRate, true, 0.0f);
     }
-    
-    if (GEngine)
-        {
-            GEngine->ClearOnScreenDebugMessages();
-            GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Firing")));
-        }
 }
 
 void AAssaultWeapon::OnStopFire() {
     Super::OnStopFire();
     
     GetWorldTimerManager().ClearTimer(FireTimer);
-    
-    if (GEngine)
-        {
-            GEngine->ClearOnScreenDebugMessages();
-            GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Not Firing")));
-        }
 }

@@ -31,10 +31,9 @@ float ADwarfCharacter::TakeDamage(float Damage, struct FDamageEvent const& Damag
     float ActualDamage = Super::TakeDamage(Damage, DamageEvent, EventInstigator, DamageCauser);
     if (ActualDamage > 0.0f) {
         if (GEngine)
-            {
-                GEngine->ClearOnScreenDebugMessages();
-                GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Dwarf Hit!")));
-            }
+                {
+                    GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green, FString::Printf(TEXT("Dwarf Hit! (%f/20.0)"), Health));
+                }
         //Reduce health points
         Health -= ActualDamage;
         if (Health <= 0.0f)

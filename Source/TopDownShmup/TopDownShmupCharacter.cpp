@@ -78,10 +78,9 @@ float ATopDownShmupCharacter::TakeDamage(float Damage, struct FDamageEvent const
     float ActualDamage = Super::TakeDamage(Damage, DamageEvent, EventInstigator, DamageCauser);
     if (ActualDamage > 0.0f) {
         if (GEngine)
-            {
-                GEngine->ClearOnScreenDebugMessages();
-                GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Player Hit!")));
-            }
+                {
+                    GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, FString::Printf(TEXT("Player Hit! (%f/100.0)"), Health));
+                }
         //Reduce health points
         Health -= ActualDamage;
         if (Health <= 0.0f)
