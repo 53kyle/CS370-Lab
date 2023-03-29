@@ -21,11 +21,15 @@ public:
      UPROPERTY(EditAnywhere, Category = "ACharacter")
     TSubclassOf<ACharacter> DwarfCharacter;
      UPROPERTY(EditAnywhere, Category = "MinSpawnTime")
-    float minspawntime = 1.0f;
+    float minspawntime = 3.0f;
      UPROPERTY(EditAnywhere, Category = "MaxSpawnTime")
     float maxspawntime = 10.0f;
+    
+    FTimerHandle TheSpawnTimer;
+    
      
     virtual void SpawnCharacter();
+    virtual void SpawnTimer();
     
 private:
     ACharacter* MyCharacter;

@@ -8,7 +8,7 @@
 void ASpawnManager::BeginPlay() {
     Super::BeginPlay();
     
-    SpawnCharacter();
+    SpawnTimer();
 }
 void ASpawnManager::SpawnCharacter() {
     //ask about this later, need to know how weapon spawns were handled.
@@ -20,7 +20,7 @@ void ASpawnManager::SpawnCharacter() {
             SpawnParams.Owner = this;
             SpawnParams.Instigator = GetInstigator();
             
-            FRotator Rotation(0.0f, -90.0f, 0.0f);
+            FRotator Rotation(0.0f, 0.0f, 0.0f);
             
             int32 TArraySize = targetPoints.Num();
             
@@ -34,9 +34,13 @@ void ASpawnManager::SpawnCharacter() {
                 MyCharacter->SpawnDefaultController();
             }
             
-            
+            GetWorldTimerManager().SetTimer(TheSpawnTimer, this, &ASpawnManager::SpawnCharacter, FMath::FRandRange(minspawntime, maxspawntime), false);
         }
     }
 
     //refer to the document for specific smaller details that are still important.
+}
+
+void ASpawnManager::SpawnTimer() {
+    GetWorldTimerManager().SetTimer(TheSpawnTimer, this, &ASpawnManager::SpawnCharacter,minspawntime, false);
 }
