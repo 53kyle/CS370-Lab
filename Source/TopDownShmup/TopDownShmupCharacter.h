@@ -1,6 +1,7 @@
 // Copyright 1998-2015 Epic Games, Inc. All Rights Reserved.
 #pragma once
 #include "GameFramework/Character.h"
+#include "SpawnManager.h"
 #include "Weapon.h"
 #include "TopDownShmupCharacter.generated.h"
 
@@ -35,6 +36,8 @@ public:
     void OnStopFire();
     
     void Die();
+    
+    void SpawnCharacter();
     
     UPROPERTY(EditAnywhere, Category = "Health")
     float Health = 100;

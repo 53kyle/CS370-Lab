@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Engine/TargetPoint.h"
+#include "DwarfCharacter.h"
 #include "SpawnManager.generated.h"
 
 
@@ -18,14 +19,16 @@ public:
      UPROPERTY(EditAnywhere, Category = "TArray")
     TArray<ATargetPoint*> targetPoints;
      UPROPERTY(EditAnywhere, Category = "ACharacter")
-    TSubclassOf<ACharacter> BP_Dwarf;
+    TSubclassOf<ACharacter> DwarfCharacter;
      UPROPERTY(EditAnywhere, Category = "MinSpawnTime")
     float minspawntime = 1.0f;
      UPROPERTY(EditAnywhere, Category = "MaxSpawnTime")
-    float maxspawntime = 2.0f;
+    float maxspawntime = 10.0f;
      
-    void SpawnCharacter();
+    virtual void SpawnCharacter();
     
+private:
+    ACharacter* MyCharacter;
 
 	
 };

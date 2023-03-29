@@ -52,10 +52,16 @@ void ATopDownShmupCharacter::BeginPlay() {
             if (MyWeapon) {
                 MyWeapon->WeaponMesh->AttachToComponent(GetMesh(), FAttachmentTransformRules(EAttachmentRule::KeepRelative, true), TEXT("WeaponPoint"));
             }
+
         }
     }
     
     MyWeapon->MyPawn = this;
+    
+    SpawnCharacter();
+    SpawnDefaultController();
+
+
 }
 
 void ATopDownShmupCharacter::OnStartFire() {
@@ -103,4 +109,8 @@ float ATopDownShmupCharacter::TakeDamage(float Damage, struct FDamageEvent const
 
 bool ATopDownShmupCharacter::IsDead() {
     return Dead;
+}
+
+void ATopDownShmupCharacter::SpawnCharacter() {
+    
 }
