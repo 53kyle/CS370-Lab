@@ -30,6 +30,9 @@ public:
     
     virtual void OnStopFire() override;
     
+    UPROPERTY(EditAnywhere, Category = "Damage")
+    float AWDamage = 2.0f;
+    
 protected:
     UPROPERTY(EditDefaultsOnly, Category = "Effects")
     UParticleSystem* HitFX;

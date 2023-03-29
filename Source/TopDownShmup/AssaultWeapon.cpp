@@ -2,6 +2,7 @@
 
 
 #include "AssaultWeapon.h"
+#include "DwarfCharacter.h"
 
 AAssaultWeapon::AAssaultWeapon() {
     FireRate = 5.0f;
@@ -29,6 +30,12 @@ void AAssaultWeapon::WeaponTrace() {
     // Did this hit anything?
     if (Hit.bBlockingHit) {
         UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), HitFX, Hit.Location);
+        
+        ADwarfCharacter* Dwarf = Cast<ADwarfCharacter>(Hit.GetActor());
+        if (Dwarf)
+        {
+           Dwarf->TakeDamage(AWDamage, FDamageEvent(), GetInstigatorController(), this);
+        }
     }
 }
 

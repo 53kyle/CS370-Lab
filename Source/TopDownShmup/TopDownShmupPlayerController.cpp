@@ -86,7 +86,9 @@ void ATopDownShmupPlayerController::OnStartFire() {
     
     ATopDownShmupCharacter *MyCharacter = Cast<ATopDownShmupCharacter>(Pawn);
     
-    MyCharacter->OnStartFire();
+    if (!MyCharacter->IsDead()) {
+        MyCharacter->OnStartFire();
+    }
 }
 
 void ATopDownShmupPlayerController::OnStopFire() {
@@ -94,14 +96,16 @@ void ATopDownShmupPlayerController::OnStopFire() {
     
     ATopDownShmupCharacter *MyCharacter = Cast<ATopDownShmupCharacter>(Pawn);
     
-    MyCharacter->OnStopFire();
+    if (!MyCharacter->IsDead()) {
+        MyCharacter->OnStopFire();
+    }
 }
 
 //move forward
 void ATopDownShmupPlayerController::MoveForward(float Value) {
     if (Value != 0.0f) {
         APawn* const Pawn = GetPawn();
-        if (Pawn)
+        if (Pawn && !IgnoreMoveInput)
         {
             Pawn->AddMovementInput(FVector(1.0f,0.0f,0.0f), Value);
         }
@@ -112,7 +116,7 @@ void ATopDownShmupPlayerController::MoveForward(float Value) {
 void ATopDownShmupPlayerController::MoveRight(float Value) {
     if (Value != 0.0f) {
         APawn* const Pawn = GetPawn();
-        if (Pawn)
+        if (Pawn && !IgnoreMoveInput)
         {
             Pawn->AddMovementInput(FVector(0.0f,1.0f,0.0f), Value);
         }
@@ -123,7 +127,7 @@ void ATopDownShmupPlayerController::MoveRight(float Value) {
 void ATopDownShmupPlayerController::UpdateMouseLook() {
     APawn* const Pawn = GetPawn();
     
-    if (Pawn) {
+    if (Pawn && !IgnoreLookInput) {
         FHitResult Hit;
         GetHitResultUnderCursor(ECC_Visibility, false, Hit);
         

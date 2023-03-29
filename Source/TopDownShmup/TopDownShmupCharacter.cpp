@@ -69,3 +69,39 @@ void ATopDownShmupCharacter::OnStopFire() {
         MyWeapon->OnStopFire();
     }
 }
+
+void ATopDownShmupCharacter::Die() {
+    GetMesh()->Deactivate();
+}
+
+float ATopDownShmupCharacter::TakeDamage(float Damage, struct FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) {
+    float ActualDamage = Super::TakeDamage(Damage, DamageEvent, EventInstigator, DamageCauser);
+    if (ActualDamage > 0.0f) {
+        if (GEngine)
+            {
+                GEngine->ClearOnScreenDebugMessages();
+                GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Player Hit!")));
+            }
+        //Reduce health points
+        Health -= ActualDamage;
+        if (Health <= 0.0f)
+        {
+            // We're dead
+            SetCanBeDamaged(false); // Don't allow further damage
+            
+            Dead = true;
+            
+            Controller->SetIgnoreLookInput(true);
+            Controller->SetIgnoreMoveInput(true);
+            
+            GetWorldTimerManager().SetTimer(DeathTimer, this, &ATopDownShmupCharacter::Die, PlayAnimMontage(DeathAnim) - 0.25f, false);
+            
+            OnStopFire();
+        }
+    }
+   return ActualDamage;
+}
+
+bool ATopDownShmupCharacter::IsDead() {
+    return Dead;
+}

@@ -28,14 +28,30 @@ public:
 	/** Returns CameraBoom subobject **/
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
     
+    virtual float TakeDamage(float Damage, struct FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
+    
     void OnStartFire();
     
     void OnStopFire();
     
+    void Die();
+    
+    UPROPERTY(EditAnywhere, Category = "Health")
+    float Health = 100;
+    
+    bool IsDead();
+    
+    FTimerHandle DeathTimer;
+    
 private:
     AWeapon* MyWeapon;
     
+    bool Dead = false;
+    
 protected:
     virtual void BeginPlay() override;
+    
+    UPROPERTY(EditDefaultsOnly, Category = "Animations")
+    UAnimMontage* DeathAnim;
 };
 
