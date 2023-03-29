@@ -17,9 +17,9 @@ void ADwarfCharacter::Die() {
 }
 
 void ADwarfCharacter::StartAttack() {
-    if (!GetWorldTimerManager().IsTimerActive(AttackTimer)) {
+    /*if (!GetWorldTimerManager().IsTimerActive(AttackTimer)) {
         GetWorldTimerManager().SetTimer(AttackTimer, this, &ADwarfCharacter::Attack, PlayAnimMontage(AttackAnim), true);
-    }
+    }*/
 }
 
 void ADwarfCharacter::StopAttack() {

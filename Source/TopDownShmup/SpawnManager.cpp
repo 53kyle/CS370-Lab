@@ -5,6 +5,12 @@
 
 
 
+void ASpawnManager::BeginPlay() {
+    Super::BeginPlay();
+    
+    SpawnCharacter();
+    
+}
 void ASpawnManager::SpawnCharacter() {
     //ask about this later, need to know how weapon spawns were handled.
     if (DwarfCharacter) {
@@ -17,15 +23,17 @@ void ASpawnManager::SpawnCharacter() {
             
             FRotator Rotation(0.0f, 0.0f, -90.0f);
             
-            float TArraySize = targetPoints.Num();
+            int32 TArraySize = targetPoints.Num();
             
-            MyCharacter = World->SpawnActor<ACharacter>(DwarfCharacter, targetPoints[FMath::FRandRange(0.0f,TArraySize)]->GetTargetLocation(), Rotation, SpawnParams);
+            MyCharacter = World->SpawnActor<ACharacter>(DwarfCharacter, targetPoints[FMath::RandRange(0,TArraySize-1)]->GetTargetLocation(), Rotation, SpawnParams);
             
             if (MyCharacter) {
-                MyCharacter->SkeletalMesh->AttachToComponent(GetMesh(), FAttachmentTransformRules(EAttachmentRule::KeepRelative, true), TEXT("DwarfGrunt_R_new"));
+                           //AttachToComponent(GetMesh(), FAttachmentTransformRules(EAttachmentRule::KeepRelative, true), TEXT("WeaponPoint"));
+                MyCharacter->AttachToComponent(MyCharacter->GetMesh(), FAttachmentTransformRules(EAttachmentRule::KeepRelative, true), TEXT("RootComponent"));
+                MyCharacter->SpawnDefaultController();
             }
             
-
+            
         }
     }
 

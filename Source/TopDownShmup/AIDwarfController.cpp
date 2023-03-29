@@ -32,7 +32,7 @@ void AAIDwarfController::OnMoveCompleted(FAIRequestID RequestID, EPathFollowingR
     
     if (GEngine)
         {
-            GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Dwarf Move Completed")));
+            GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Dwarf Movee4 Completed")));
         }
 }
 

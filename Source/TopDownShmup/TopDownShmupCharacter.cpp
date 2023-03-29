@@ -57,9 +57,6 @@ void ATopDownShmupCharacter::BeginPlay() {
     }
     
     MyWeapon->MyPawn = this;
-    
-    SpawnCharacter();
-    SpawnDefaultController();
 
 
 }

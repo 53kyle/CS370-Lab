@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Engine/TargetPoint.h"
+#include "GameFramework/Character.h"
 #include "DwarfCharacter.h"
 #include "SpawnManager.generated.h"
 
@@ -14,7 +15,6 @@ class TOPDOWNSHMUP_API ASpawnManager : public ATargetPoint
 	GENERATED_BODY()
     
 public:
-    
      //four "editanywhere" uproperties for later
      UPROPERTY(EditAnywhere, Category = "TArray")
     TArray<ATargetPoint*> targetPoints;
@@ -30,5 +30,7 @@ public:
 private:
     ACharacter* MyCharacter;
 
+protected:
+    virtual void BeginPlay() override;
 	
 };
