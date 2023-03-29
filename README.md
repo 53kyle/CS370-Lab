@@ -10,4 +10,6 @@ Steps to run the code
 
 4) Compile the code
 
-5) Press play!
+5) Check in the SpawnManager if the array of Target Points is occupied- if not, add all target points
+
+6) Press play!
