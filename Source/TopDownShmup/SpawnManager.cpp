@@ -8,7 +8,6 @@
 void ASpawnManager::BeginPlay() {
     Super::BeginPlay();
     
-    SpawnCharacter();
     
 }
 void ASpawnManager::SpawnCharacter() {
@@ -21,14 +20,15 @@ void ASpawnManager::SpawnCharacter() {
             SpawnParams.Owner = this;
             SpawnParams.Instigator = GetInstigator();
             
-            FRotator Rotation(0.0f, 0.0f, -90.0f);
+            FRotator Rotation(0.0f, -90.0f, 0.0f);
             
             int32 TArraySize = targetPoints.Num();
             
             MyCharacter = World->SpawnActor<ACharacter>(DwarfCharacter, targetPoints[FMath::RandRange(0,TArraySize-1)]->GetTargetLocation(), Rotation, SpawnParams);
             
+            
+            
             if (MyCharacter) {
-                           //AttachToComponent(GetMesh(), FAttachmentTransformRules(EAttachmentRule::KeepRelative, true), TEXT("WeaponPoint"));
                 MyCharacter->AttachToComponent(MyCharacter->GetMesh(), FAttachmentTransformRules(EAttachmentRule::KeepRelative, true), TEXT("RootComponent"));
                 MyCharacter->SpawnDefaultController();
             }
