@@ -6,7 +6,7 @@ Steps to run the code
 
 2) Rebuild modules when asked by pressing ‘yes’
 
-3) Unreal may crash, reopening the .uproject should work though.
+3) Unreal may crash, but upon reopening the .uproject it should work.
 
 4) Compile the code
 
